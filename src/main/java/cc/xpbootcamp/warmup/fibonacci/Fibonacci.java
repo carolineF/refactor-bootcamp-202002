@@ -15,7 +15,7 @@ public class Fibonacci {
         if (index == 1 || index == 2) {
             return 1;
         }
-        return 1;
+        return getFibonacciNumber(index - 1) + getFibonacciNumber(index - 2);
     }
 
     public String getFibonacci() {

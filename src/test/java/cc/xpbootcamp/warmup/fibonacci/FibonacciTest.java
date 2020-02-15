@@ -22,11 +22,20 @@ class FibonacciTest {
     }
 
     @Test
-    void shouldReturnSecondValueOfFibonacciAppend() {
+    void shouldReturnFirstTwoFibonacciSplitWithCommaSeparated() {
         Fibonacci fibonacci = new Fibonacci(2);
 
         String fibonacciString = fibonacci.getFibonacci();
 
         assertThat(fibonacciString, containsString("1,1"));
+    }
+
+    @Test
+    void shouldReturnFirstFiveFibonacciSplitWithCommaSeparated() {
+        Fibonacci fibonacci = new Fibonacci(5);
+
+        String fibonacciString = fibonacci.getFibonacci();
+
+        assertThat(fibonacciString, containsString("1,1,2,3,5"));
     }
 }
