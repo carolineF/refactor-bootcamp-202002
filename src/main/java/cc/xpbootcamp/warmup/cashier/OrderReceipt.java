@@ -26,14 +26,7 @@ public class OrderReceipt {
 
         // prints lineItems
         for (LineItem lineItem : order.getLineItemList()) {
-            output.append(lineItem.getDescription());
-            output.append('\t');
-            output.append(lineItem.getPrice());
-            output.append('\t');
-            output.append(lineItem.getQuantity());
-            output.append('\t');
-            output.append(lineItem.totalAmount());
-            output.append('\n');
+            output.append(lineItem.getLineItemString());
         }
 
         // prints the state tax
