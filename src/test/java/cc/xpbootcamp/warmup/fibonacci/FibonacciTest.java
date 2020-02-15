@@ -18,9 +18,15 @@ class FibonacciTest {
 
         String fibonacciString = fibonacci.getFibonacci();
 
-
         assertThat(fibonacciString, containsString("1"));
     }
 
+    @Test
+    void shouldReturnSecondValueOfFibonacciAppend() {
+        Fibonacci fibonacci = new Fibonacci(2);
 
+        String fibonacciString = fibonacci.getFibonacci();
+
+        assertThat(fibonacciString, containsString("1,1"));
+    }
 }
