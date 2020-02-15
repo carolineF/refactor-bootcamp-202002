@@ -1,19 +1,19 @@
 package cc.xpbootcamp.warmup.cashier;
 
 public class LineItem {
-	private String desc;
+	private String description;
 	private double price;
-	private int qty;
+	private int quantity;
 
-	public LineItem(String desc, double price, int qty) {
+	public LineItem(String description, double price, int quantity) {
 		super();
-		this.desc = desc;
+		this.description = description;
 		this.price = price;
-		this.qty = qty;
+		this.quantity = quantity;
 	}
 
 	public String getDescription() {
-		return desc;
+		return description;
 	}
 
 	public double getPrice() {
@@ -21,20 +21,20 @@ public class LineItem {
 	}
 
 	public int getQuantity() {
-		return qty;
+		return quantity;
 	}
 
     double totalAmount() {
-        return price * qty;
+        return price * quantity;
     }
 
     public String getLineItemString() {
 		return new StringBuilder()
-				.append(desc)
+				.append(description)
 				.append('\t')
 				.append(price)
 				.append('\t')
-				.append(qty)
+				.append(quantity)
 				.append('\t')
 				.append(totalAmount())
 				.append('\n')

@@ -3,37 +3,37 @@ package cc.xpbootcamp.warmup.cashier;
 import java.util.List;
 
 public class Order {
-    String cName;
-    String addr;
-    double totSalesTx = 0d;
-    double tot = 0d;
+    String customerName;
+    String address;
+    double totalSalesTax = 0d;
+    double totalAmount = 0d;
     List<LineItem> lineItemList;
 
-    public Order(String cName, String addr, List<LineItem> lineItemList) {
-        this.cName = cName;
-        this.addr = addr;
+    public Order(String customerName, String address, List<LineItem> lineItemList) {
+        this.customerName = customerName;
+        this.address = address;
         this.lineItemList = lineItemList;
         this.calculate();
     }
 
     public String getCustomerName() {
-        return cName;
+        return customerName;
     }
 
     public String getCustomerAddress() {
-        return addr;
+        return address;
     }
 
     public List<LineItem> getLineItemList() {
         return lineItemList;
     }
 
-    public double getTotSalesTx() {
-        return totSalesTx;
+    public double getTotalSalesTax() {
+        return totalSalesTax;
     }
 
-    public double getTot() {
-        return tot;
+    public double getTotalAmount() {
+        return totalAmount;
     }
 
     private void calculate() {
@@ -41,10 +41,10 @@ public class Order {
         for (LineItem lineItem : this.lineItemList) {
             // calculate sales tax @ rate of 10%
             double salesTax = lineItem.totalAmount() * .10;
-            totSalesTx += salesTax;
+            totalSalesTax += salesTax;
 
             // calculate total amount of lineItem = price * quantity + 10 % sales tax
-            tot += lineItem.totalAmount() + salesTax;
+            totalAmount += lineItem.totalAmount() + salesTax;
         }
     }
 }

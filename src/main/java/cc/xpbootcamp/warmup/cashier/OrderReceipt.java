@@ -30,10 +30,10 @@ public class OrderReceipt {
         }
 
         // prints the state tax
-        output.append("Sales Tax").append('\t').append(order.getTotSalesTx());
+        output.append("Sales Tax").append('\t').append(order.getTotalSalesTax());
 
         // print total amount
-        output.append("Total Amount").append('\t').append(order.getTot());
+        output.append("Total Amount").append('\t').append(order.getTotalAmount());
         return output.toString();
     }
 }
