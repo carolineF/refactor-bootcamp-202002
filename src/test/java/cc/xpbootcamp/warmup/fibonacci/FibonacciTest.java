@@ -36,29 +36,28 @@ class FibonacciTest {
 
     @Test
     void shouldReturnFirstFiveFibonacciSplitWithCommaSeparated() {
-        Fibonacci fibonacci = new Fibonacci(50);
+        Fibonacci fibonacci = new Fibonacci(5);
 
         String fibonacciString = fibonacci.getFibonacci();
 
         assertThat(fibonacciString, containsString("1,1,2,3,5"));
     }
-    //TODO how to compare two long number
-//
-//    @Test
-//    void shouldGetNumber0WhenIndexIs0() {
-//        Fibonacci fibonacci = new Fibonacci(5);
-//
-//        Long fibonacciNumber = fibonacci.getFibonacciNumber(0);
-//
-//        assertEquals(java.util.Optional.of(0), fibonacciNumber);
-//    }
 
-//    @Test
-//    void shouldReturnFiftiethFibonacciWithNumber12586269025() {
-//        Fibonacci fibonacci = new Fibonacci(50);
-//
-//        BigInteger fibonacciNumber = fibonacci.getFibonacciNumber(50);
-//
-//        Assert.isTrue(fibonacciNumber.subtract(BigInteger.valueOf(12586269025)) == 0);
-//    }
+    @Test
+    void should_return_0_when_calculate_given_position_is_0() {
+        Fibonacci fibonacci = new Fibonacci(5);
+
+        Long fibonacciNumber = fibonacci.getFibonacciNumber(0);
+
+        assertEquals(Long.valueOf(0), fibonacciNumber);
+    }
+
+    @Test
+    void should_return_12586269025_when_calculate_given_position_is_50() {
+        Fibonacci fibonacci = new Fibonacci(1);
+
+        Long fibonacciNumber = fibonacci.getFibonacciNumber(50);
+
+        assertEquals(Long.valueOf(12586269025L), fibonacciNumber);
+    }
 }

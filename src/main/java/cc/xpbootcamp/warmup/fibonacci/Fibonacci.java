@@ -14,6 +14,10 @@ public class Fibonacci {
     }
 
     public Long getFibonacciNumber(long index) {
+        if(index <= 0) {
+            return Long.valueOf(0);
+        }
+
         if (index == 1 || index == 2) {
             return Long.valueOf(1);
         }
