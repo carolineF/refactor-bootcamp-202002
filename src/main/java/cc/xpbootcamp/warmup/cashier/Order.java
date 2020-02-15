@@ -40,11 +40,10 @@ public class Order {
         // prints lineItems
         for (LineItem lineItem : this.lineItemList) {
             // calculate sales tax @ rate of 10%
-            double salesTax = lineItem.totalAmount() * .10;
-            totalSalesTax += salesTax;
+            totalSalesTax += lineItem.lineItemSalesTax();
 
             // calculate total amount of lineItem = price * quantity + 10 % sales tax
-            totalAmount += lineItem.totalAmount() + salesTax;
+            totalAmount += lineItem.totalAmount() + lineItem.lineItemSalesTax();
         }
     }
 }

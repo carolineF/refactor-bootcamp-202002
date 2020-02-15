@@ -28,6 +28,10 @@ public class LineItem {
         return price * quantity;
     }
 
+    double lineItemSalesTax() {
+		return totalAmount() * .10;
+	}
+
     public String getLineItemString() {
 		return new StringBuilder()
 				.append(description)
