@@ -37,12 +37,9 @@ public class Order {
     }
 
     private void calculate() {
-        // prints lineItems
         for (LineItem lineItem : this.lineItemList) {
-            // calculate sales tax @ rate of 10%
             totalSalesTax += lineItem.lineItemSalesTax();
 
-            // calculate total amount of lineItem = price * quantity + 10 % sales tax
             totalAmount += lineItem.totalAmount() + lineItem.lineItemSalesTax();
         }
     }
