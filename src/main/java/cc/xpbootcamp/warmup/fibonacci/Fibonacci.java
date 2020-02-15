@@ -1,35 +1,27 @@
 package cc.xpbootcamp.warmup.fibonacci;
 
-import java.math.BigInteger;
-
 /**
+ * getFibonacci function output Fiftieth of FibonacciString
  *
+ * getFibonacciNumber function output position of fibonacci number
  *
  */
 public class Fibonacci {
-    private Integer indexLimit;
+    private Integer indexLimit = 50;
 
-    public Fibonacci(Integer indexLimit) {
-        this.indexLimit = indexLimit;
-    }
-
-    public Long getFibonacciNumber(long index) {
-        if(index <= 0) {
+    public Long getFibonacciNumber(long position) {
+        if(position <= 0) {
             return Long.valueOf(0);
         }
 
-        if (index == 1 || index == 2) {
+        if (position == 1 || position == 2) {
             return Long.valueOf(1);
         }
-        return getFibonacciNumber(index - 1) + getFibonacciNumber(index - 2);
+        return getFibonacciNumber(position - 1) + getFibonacciNumber(position - 2);
     }
 
     public String getFibonacci() {
         StringBuilder fibonacciString = new StringBuilder();
-
-        if(this.indexLimit < 1) {
-            return String.valueOf('0');
-        }
 
         for (int i = 1; i <= this.indexLimit; i++) {
             fibonacciString.append(getFibonacciNumber(i).toString() + ',');
@@ -39,6 +31,4 @@ public class Fibonacci {
         System.out.println(fibonacciString);
         return fibonacciString.toString();
     }
-
-
 }
