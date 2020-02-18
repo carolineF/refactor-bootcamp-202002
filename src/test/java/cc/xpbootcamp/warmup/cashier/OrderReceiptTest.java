@@ -21,6 +21,20 @@ class OrderReceiptTest {
     }
 
     @Test
+    void shouldPrintLineItemAmountOnOrder() {
+        List<LineItem> lineItems = new ArrayList<LineItem>() {{
+            add(new LineItem("巧克力", 21.5, 2));
+            add(new LineItem("小白菜", 10.0, 1));
+        }};
+        Order order = new Order("Mr X", "Chicago, 60601", lineItems,  LocalDate.parse("2020-02-17"));
+        OrderReceipt receipt = new OrderReceipt(order);
+
+        String output = receipt.printReceipt();
+
+        assertThat(output, containsString("总价:\t58.30"));
+    }
+
+    @Test
     void shouldPrintCustomerInformationOnOrder() {
         Order order = new Order("Mr X", "Chicago, 60601", new ArrayList<LineItem>(), LocalDate.parse("2020-02-17"));
         OrderReceipt receipt = new OrderReceipt(order);
@@ -46,8 +60,8 @@ class OrderReceiptTest {
         assertThat(output, containsString("milk\t10.0\t2\t20.0\n"));
         assertThat(output, containsString("biscuits\t5.0\t5\t25.0\n"));
         assertThat(output, containsString("chocolate\t20.0\t1\t20.0\n"));
-        assertThat(output, containsString("Sales Tax\t6.5"));
-        assertThat(output, containsString("Total Amount\t71.5"));
+        assertThat(output, containsString("税额:\t6.5"));
+        assertThat(output, containsString("总价:\t71.5"));
     }
 
 }

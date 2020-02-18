@@ -1,8 +1,7 @@
 package cc.xpbootcamp.warmup.cashier;
 
-import java.time.LocalDate;
+import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -13,8 +12,9 @@ import java.util.Locale;
  *
  */
 public class OrderReceipt {
-    private Order order;
+    private static final DecimalFormat priceFormatter = new DecimalFormat("#.00");
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy年M月dd日，EEEE", Locale.CHINA);
+    private Order order;
 
     public OrderReceipt(Order order) {
         this.order = order;
@@ -34,9 +34,9 @@ public class OrderReceipt {
             output.append(lineItem.getLineItemString());
         }
 
-        output.append("Sales Tax").append('\t').append(order.getTotalSalesTax());
+        output.append("税额:").append('\t').append(priceFormatter.format(order.getTotalSalesTax()) + '\n');
 
-        output.append("Total Amount").append('\t').append(order.getTotalAmount());
+        output.append("总价:").append('\t').append(priceFormatter.format(order.getTotalAmount()) + '\n');
         return output.toString();
     }
 }

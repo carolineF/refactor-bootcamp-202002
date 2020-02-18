@@ -12,11 +12,11 @@ public class LineItem {
 		this.quantity = quantity;
 	}
 
-    double totalAmount() {
+    public double totalAmount() {
         return price * quantity;
     }
 
-    double lineItemSalesTax() {
+    public double lineItemSalesTax() {
 		return totalAmount() * .10;
 	}
 
