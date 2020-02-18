@@ -3,6 +3,7 @@ package cc.xpbootcamp.warmup.cashier;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -10,8 +11,18 @@ import static org.hamcrest.Matchers.containsString;
 
 class OrderReceiptTest {
     @Test
+    void shouldPrintDateStringOnOrder() {
+        Order order = new Order("Mr X", "Chicago, 60601", new ArrayList<LineItem>(),  LocalDate.parse("2020-02-17"));
+        OrderReceipt receipt = new OrderReceipt(order);
+
+        String output = receipt.printReceipt();
+
+        assertThat(output, containsString("2020年2月17日，星期一"));
+    }
+
+    @Test
     void shouldPrintCustomerInformationOnOrder() {
-        Order order = new Order("Mr X", "Chicago, 60601", new ArrayList<LineItem>());
+        Order order = new Order("Mr X", "Chicago, 60601", new ArrayList<LineItem>(), LocalDate.parse("2020-02-17"));
         OrderReceipt receipt = new OrderReceipt(order);
 
         String output = receipt.printReceipt();
@@ -28,7 +39,7 @@ class OrderReceiptTest {
             add(new LineItem("biscuits", 5.0, 5));
             add(new LineItem("chocolate", 20.0, 1));
         }};
-        OrderReceipt receipt = new OrderReceipt(new Order(null, null, lineItems));
+        OrderReceipt receipt = new OrderReceipt(new Order(null, null, lineItems, LocalDate.parse("2020-02-17")));
 
         String output = receipt.printReceipt();
 

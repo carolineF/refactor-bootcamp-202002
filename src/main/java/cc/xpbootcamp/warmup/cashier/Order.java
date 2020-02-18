@@ -1,6 +1,7 @@
 package cc.xpbootcamp.warmup.cashier;
 
 import java.util.List;
+import java.time.LocalDate;
 
 public class Order {
     String customerName;
@@ -8,12 +9,18 @@ public class Order {
     double totalSalesTax = 0d;
     double totalAmount = 0d;
     List<LineItem> lineItemList;
+    LocalDate orderDate;
 
-    public Order(String customerName, String address, List<LineItem> lineItemList) {
+    public Order(String customerName, String address, List<LineItem> lineItemList, LocalDate orderDate) {
         this.customerName = customerName;
         this.address = address;
         this.lineItemList = lineItemList;
+        this.orderDate = orderDate;
         this.calculate();
+    }
+
+    public LocalDate getOrderDate() {
+        return orderDate;
     }
 
     public String getCustomerName() {
