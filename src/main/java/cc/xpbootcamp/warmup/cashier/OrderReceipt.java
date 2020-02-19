@@ -14,6 +14,7 @@ import java.util.Locale;
 public class OrderReceipt {
     private static final DecimalFormat priceFormatter = new DecimalFormat("#.00");
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy年M月dd日，EEEE", Locale.CHINA);
+    private static final String SPLIT_LINE = "\n\n";
     private Order order;
 
     public OrderReceipt(Order order) {
@@ -23,20 +24,49 @@ public class OrderReceipt {
     public String printReceipt() {
         StringBuilder output = new StringBuilder();
 
-        output.append("====== 老王超市，值得信赖 ======\n");
+        output.append(generateReceiptHeader());
 
-        output.append(dateTimeFormatter.format(order.getOrderDate()) + '\n');
+        output.append(generateReceiptLineItem());
 
-        output.append(order.getCustomerName());
-        output.append(order.getCustomerAddress());
+        output.append("-----------------------------------\n");
 
-        for (LineItem lineItem : order.getLineItemList()) {
-            output.append(lineItem.getLineItemString());
-        }
+        output.append(generateReceiptFooter());
 
-        output.append("税额:").append('\t').append(priceFormatter.format(order.getTotalSalesTax()) + '\n');
-
-        output.append("总价:").append('\t').append(priceFormatter.format(order.getTotalAmountWithDiscount()) + '\n');
         return output.toString();
+    }
+
+    private String generateReceiptFooter() {
+        return generateReceiptSalesTax() +
+                generateReceiptDiscount() +
+                generateReceiptTotalAmount();
+    }
+
+    private String generateReceiptSalesTax() {
+        return "税额:\t" + priceFormatter.format(order.getTotalSalesTax()) + '\n';
+    }
+
+    private String generateReceiptDiscount() {
+        return order.calculateDiscountAmount() > 0
+                ? "折扣:\t" + priceFormatter.format(order.calculateDiscountAmount()) + '\n'
+                : "";
+    }
+
+    private String generateReceiptTotalAmount() {
+        return "总价:\t" + priceFormatter.format(order.getTotalAmountWithDiscount()) + '\n';
+    }
+
+    private String generateReceiptLineItem() {
+        StringBuilder lineItemString = new StringBuilder();
+        for (LineItem lineItem : order.getLineItemList()) {
+            lineItemString.append(lineItem.getLineItemString());
+        }
+        return lineItemString.toString();
+    }
+
+    private String generateReceiptHeader() {
+        return "====== 老王超市，值得信赖 ======" + SPLIT_LINE +
+                dateTimeFormatter.format(order.getOrderDate()) + SPLIT_LINE +
+                order.getCustomerName() + '\n'  +
+                order.getCustomerAddress() + '\n';
     }
 }

@@ -48,16 +48,16 @@ public class Order {
         return totalSalesTax;
     }
 
+    public double calculateDiscountAmount() {
+        return getTotalAmount() * calculateDiscount();
+    }
+
     private double getTotalAmount() {
         double totalAmount = 0d;
         for (LineItem lineItem : lineItemList) {
             totalAmount += lineItem.totalAmount() + lineItem.lineItemSalesTax();
         }
         return totalAmount;
-    }
-
-    private double calculateDiscountAmount() {
-        return getTotalAmount() * calculateDiscount();
     }
 
     private double calculateDiscount() {
