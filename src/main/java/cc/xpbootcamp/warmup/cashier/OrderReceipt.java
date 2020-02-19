@@ -35,7 +35,7 @@ public class OrderReceipt {
         return output.toString();
     }
 
-    public String getLineItemString(LineItem lineItem) {
+    private String getLineItemString(LineItem lineItem) {
         return new StringBuilder()
                 .append(lineItem.getDescription())
                 .append(", ")

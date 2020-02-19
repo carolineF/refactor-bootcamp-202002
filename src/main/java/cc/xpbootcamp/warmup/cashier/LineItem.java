@@ -33,16 +33,4 @@ public class LineItem {
 		return totalAmount() * SALES_TAX;
 	}
 
-    public String getLineItemString() {
-		return new StringBuilder()
-				.append(description)
-				.append(", ")
-				.append(price)
-				.append(" x ")
-				.append(quantity)
-				.append(", ")
-				.append(totalAmount())
-				.append('\n')
-				.toString();
-	}
 }
