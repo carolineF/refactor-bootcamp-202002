@@ -45,6 +45,7 @@ class OrderReceiptTest {
 
         String output = receipt.printReceipt();
 
+        assertThat(output, containsString("折扣:\t1.17"));
         assertThat(output, containsString("总价:\t57.13"));
     }
 
