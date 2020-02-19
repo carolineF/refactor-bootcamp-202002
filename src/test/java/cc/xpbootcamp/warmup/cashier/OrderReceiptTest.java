@@ -35,6 +35,20 @@ class OrderReceiptTest {
     }
 
     @Test
+    void shouldPrintLineItemAmountWithDiscountOnOrder() {
+        List<LineItem> lineItems = new ArrayList<LineItem>() {{
+            add(new LineItem("巧克力", 21.5, 2));
+            add(new LineItem("小白菜", 10.0, 1));
+        }};
+        Order order = new Order("Mr X", "Chicago, 60601", lineItems,  LocalDate.parse("2020-02-19"));
+        OrderReceipt receipt = new OrderReceipt(order);
+
+        String output = receipt.printReceipt();
+
+        assertThat(output, containsString("总价:\t57.13"));
+    }
+
+    @Test
     void shouldPrintCustomerInformationOnOrder() {
         Order order = new Order("Mr X", "Chicago, 60601", new ArrayList<LineItem>(), LocalDate.parse("2020-02-17"));
         OrderReceipt receipt = new OrderReceipt(order);

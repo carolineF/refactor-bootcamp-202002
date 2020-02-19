@@ -4,12 +4,15 @@ import java.util.List;
 import java.time.LocalDate;
 
 public class Order {
-    String customerName;
-    String address;
-    double totalSalesTax = 0d;
-    double totalAmount = 0d;
-    List<LineItem> lineItemList;
-    LocalDate orderDate;
+    private static double NO_DISCOUNT = 0d;
+    private static double WEDNESDAY_DISCOUNT = 0.02d;
+    private static byte WEDNESDAY = 3;
+    public String customerName;
+    public String address;
+    public double totalSalesTax = 0d;
+    public double totalAmount = 0d;
+    public List<LineItem> lineItemList;
+    public LocalDate orderDate;
 
     public Order(String customerName, String address, List<LineItem> lineItemList, LocalDate orderDate) {
         this.customerName = customerName;
@@ -40,7 +43,11 @@ public class Order {
     }
 
     public double getTotalAmount() {
-        return totalAmount;
+        return totalAmount - totalAmount*calculateDiscount();
+    }
+
+    private double calculateDiscount() {
+        return orderDate.getDayOfWeek().getValue() == WEDNESDAY ? WEDNESDAY_DISCOUNT : NO_DISCOUNT;
     }
 
     private void calculate() {
