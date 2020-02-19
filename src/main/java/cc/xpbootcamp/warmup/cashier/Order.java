@@ -9,8 +9,7 @@ public class Order {
     private static byte WEDNESDAY = 3;
     public String customerName;
     public String address;
-    public double totalSalesTax = 0d;
-    public double totalAmount = 0d;
+
     public List<LineItem> lineItemList;
     public LocalDate orderDate;
 
@@ -19,7 +18,6 @@ public class Order {
         this.address = address;
         this.lineItemList = lineItemList;
         this.orderDate = orderDate;
-        this.calculate();
     }
 
     public LocalDate getOrderDate() {
@@ -38,23 +36,31 @@ public class Order {
         return lineItemList;
     }
 
+    public double getTotalAmountWithDiscount() {
+        return getTotalAmount() - calculateDiscountAmount();
+    }
+
     public double getTotalSalesTax() {
+        double totalSalesTax = 0d;
+        for (LineItem lineItem : lineItemList) {
+            totalSalesTax += lineItem.lineItemSalesTax();
+        }
         return totalSalesTax;
     }
 
-    public double getTotalAmount() {
-        return totalAmount - totalAmount*calculateDiscount();
+    private double getTotalAmount() {
+        double totalAmount = 0d;
+        for (LineItem lineItem : lineItemList) {
+            totalAmount += lineItem.totalAmount() + lineItem.lineItemSalesTax();
+        }
+        return totalAmount;
+    }
+
+    private double calculateDiscountAmount() {
+        return getTotalAmount() * calculateDiscount();
     }
 
     private double calculateDiscount() {
         return orderDate.getDayOfWeek().getValue() == WEDNESDAY ? WEDNESDAY_DISCOUNT : NO_DISCOUNT;
-    }
-
-    private void calculate() {
-        for (LineItem lineItem : this.lineItemList) {
-            totalSalesTax += lineItem.lineItemSalesTax();
-
-            totalAmount += lineItem.totalAmount() + lineItem.lineItemSalesTax();
-        }
     }
 }

@@ -36,7 +36,7 @@ public class OrderReceipt {
 
         output.append("税额:").append('\t').append(priceFormatter.format(order.getTotalSalesTax()) + '\n');
 
-        output.append("总价:").append('\t').append(priceFormatter.format(order.getTotalAmount()) + '\n');
+        output.append("总价:").append('\t').append(priceFormatter.format(order.getTotalAmountWithDiscount()) + '\n');
         return output.toString();
     }
 }
