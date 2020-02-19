@@ -1,7 +1,7 @@
 package cc.xpbootcamp.warmup.cashier;
 
 public class LineItem {
-	private static double SALES_TAX = 0.1d;
+	private static final double SALES_TAX = 0.1d;
 	private String description;
 	private double price;
 	private int quantity;
@@ -13,7 +13,19 @@ public class LineItem {
 		this.quantity = quantity;
 	}
 
-    public double totalAmount() {
+	public String getDescription() {
+		return description;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public double totalAmount() {
         return price * quantity;
     }
 
@@ -24,11 +36,11 @@ public class LineItem {
     public String getLineItemString() {
 		return new StringBuilder()
 				.append(description)
-				.append('\t')
+				.append(", ")
 				.append(price)
-				.append('\t')
+				.append(" x ")
 				.append(quantity)
-				.append('\t')
+				.append(", ")
 				.append(totalAmount())
 				.append('\n')
 				.toString();

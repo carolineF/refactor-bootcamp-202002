@@ -35,6 +35,19 @@ public class OrderReceipt {
         return output.toString();
     }
 
+    public String getLineItemString(LineItem lineItem) {
+        return new StringBuilder()
+                .append(lineItem.getDescription())
+                .append(", ")
+                .append(lineItem.getPrice())
+                .append(" x ")
+                .append(lineItem.getQuantity())
+                .append(", ")
+                .append(priceFormatter.format(lineItem.totalAmount()))
+                .append('\n')
+                .toString();
+    }
+
     private String generateReceiptFooter() {
         return generateReceiptSalesTax() +
                 generateReceiptDiscount() +
@@ -58,7 +71,7 @@ public class OrderReceipt {
     private String generateReceiptLineItem() {
         StringBuilder lineItemString = new StringBuilder();
         for (LineItem lineItem : order.getLineItemList()) {
-            lineItemString.append(lineItem.getLineItemString());
+            lineItemString.append(getLineItemString(lineItem));
         }
         return lineItemString.toString();
     }

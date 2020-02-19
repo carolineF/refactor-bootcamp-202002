@@ -4,9 +4,9 @@ import java.util.List;
 import java.time.LocalDate;
 
 public class Order {
-    private static double NO_DISCOUNT = 0d;
-    private static double WEDNESDAY_DISCOUNT = 0.02d;
-    private static byte WEDNESDAY = 3;
+    private static final double NO_DISCOUNT = 0d;
+    private static final double WEDNESDAY_DISCOUNT = 0.02d;
+    private static final byte WEDNESDAY = 3;
 
     public List<LineItem> lineItemList;
     public LocalDate orderDate;
