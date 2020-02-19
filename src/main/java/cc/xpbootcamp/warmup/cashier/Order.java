@@ -7,29 +7,17 @@ public class Order {
     private static double NO_DISCOUNT = 0d;
     private static double WEDNESDAY_DISCOUNT = 0.02d;
     private static byte WEDNESDAY = 3;
-    public String customerName;
-    public String address;
 
     public List<LineItem> lineItemList;
     public LocalDate orderDate;
 
-    public Order(String customerName, String address, List<LineItem> lineItemList, LocalDate orderDate) {
-        this.customerName = customerName;
-        this.address = address;
+    public Order(List<LineItem> lineItemList, LocalDate orderDate) {
         this.lineItemList = lineItemList;
         this.orderDate = orderDate;
     }
 
     public LocalDate getOrderDate() {
         return orderDate;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public String getCustomerAddress() {
-        return address;
     }
 
     public List<LineItem> getLineItemList() {

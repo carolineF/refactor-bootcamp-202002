@@ -31,7 +31,7 @@ public class OrderReceipt {
         output.append("-----------------------------------\n");
 
         output.append(generateReceiptFooter());
-
+        System.out.println(output.toString());
         return output.toString();
     }
 
@@ -65,8 +65,6 @@ public class OrderReceipt {
 
     private String generateReceiptHeader() {
         return "====== 老王超市，值得信赖 ======" + SPLIT_LINE +
-                dateTimeFormatter.format(order.getOrderDate()) + SPLIT_LINE +
-                order.getCustomerName() + '\n'  +
-                order.getCustomerAddress() + '\n';
+                dateTimeFormatter.format(order.getOrderDate()) + SPLIT_LINE;
     }
 }
