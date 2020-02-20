@@ -7,7 +7,6 @@ package cc.xpbootcamp.warmup.fibonacci;
  *
  */
 public class Fibonacci {
-    private Integer indexLimit = 50;
 
     public Long getFibonacciNumber(long position) {
         if(position <= 0) {
@@ -20,15 +19,4 @@ public class Fibonacci {
         return getFibonacciNumber(position - 1) + getFibonacciNumber(position - 2);
     }
 
-    public String getFibonacci() {
-        StringBuilder fibonacciString = new StringBuilder();
-
-        for (int i = 1; i <= this.indexLimit; i++) {
-            fibonacciString.append(getFibonacciNumber(i).toString() + ',');
-        }
-        fibonacciString.deleteCharAt(fibonacciString.length() -1);
-
-        System.out.println(fibonacciString);
-        return fibonacciString.toString();
-    }
 }
