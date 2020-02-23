@@ -14,7 +14,14 @@ import java.util.Locale;
 public class OrderReceipt {
     private static final DecimalFormat priceFormatter = new DecimalFormat("#.00");
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy年M月dd日，EEEE", Locale.CHINA);
-    private static final String SPLIT_LINE = "\n\n";
+    private static final String NEW_LINE = "\n";
+    private static final String RECEIPT_HEADER = "====== 老王超市，值得信赖 ======\n";
+    public static final String ITEM_SPLIT_LINE = "-----------------------------------\n";
+    public static final String SALES_TAX = "税额:\t";
+    public static final String DISCOUNT = "折扣:\t";
+    public static final String TOTAL_AMOUNT = "总价:\t";
+    public static final String SEPARATED_COMMA = ", ";
+    public static final String MULTIPLICATION_SIGN = " x ";
     private Order order;
 
     public OrderReceipt(Order order) {
@@ -28,7 +35,7 @@ public class OrderReceipt {
 
         output.append(generateReceiptLineItem());
 
-        output.append("-----------------------------------\n");
+        output.append(ITEM_SPLIT_LINE);
 
         output.append(generateReceiptFooter());
 
@@ -38,13 +45,13 @@ public class OrderReceipt {
     private String getLineItemString(LineItem lineItem) {
         return new StringBuilder()
                 .append(lineItem.getDescription())
-                .append(", ")
+                .append(SEPARATED_COMMA)
                 .append(lineItem.getPrice())
-                .append(" x ")
+                .append(MULTIPLICATION_SIGN)
                 .append(lineItem.getQuantity())
-                .append(", ")
+                .append(SEPARATED_COMMA)
                 .append(priceFormatter.format(lineItem.totalAmount()))
-                .append('\n')
+                .append(NEW_LINE)
                 .toString();
     }
 
@@ -55,17 +62,17 @@ public class OrderReceipt {
     }
 
     private String generateReceiptSalesTax() {
-        return "税额:\t" + priceFormatter.format(order.getTotalSalesTax()) + '\n';
+        return SALES_TAX + priceFormatter.format(order.getTotalSalesTax()) + NEW_LINE;
     }
 
     private String generateReceiptDiscount() {
         return order.calculateDiscountAmount() > 0
-                ? "折扣:\t" + priceFormatter.format(order.calculateDiscountAmount()) + '\n'
+                ? DISCOUNT + priceFormatter.format(order.calculateDiscountAmount()) + NEW_LINE
                 : "";
     }
 
     private String generateReceiptTotalAmount() {
-        return "总价:\t" + priceFormatter.format(order.getTotalAmountWithDiscount()) + '\n';
+        return TOTAL_AMOUNT + priceFormatter.format(order.getTotalAmountWithDiscount()) + NEW_LINE;
     }
 
     private String generateReceiptLineItem() {
@@ -77,7 +84,7 @@ public class OrderReceipt {
     }
 
     private String generateReceiptHeader() {
-        return "====== 老王超市，值得信赖 ======" + SPLIT_LINE +
-                dateTimeFormatter.format(order.getOrderDate()) + SPLIT_LINE;
+        return RECEIPT_HEADER + NEW_LINE +
+                dateTimeFormatter.format(order.getOrderDate()) + NEW_LINE + NEW_LINE;
     }
 }
