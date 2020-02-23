@@ -30,11 +30,7 @@ public class Order {
     }
 
     public double getTotalSalesTax() {
-        double totalSalesTax = 0d;
-        for (LineItem lineItem : lineItemList) {
-            totalSalesTax += lineItem.lineItemSalesTax();
-        }
-        return totalSalesTax;
+        return lineItemList.stream().mapToDouble(lineItem -> lineItem.lineItemSalesTax()).sum();
     }
 
     public double calculateDiscountAmount() {
@@ -42,11 +38,7 @@ public class Order {
     }
 
     private double getTotalAmount() {
-        double totalAmount = 0d;
-        for (LineItem lineItem : lineItemList) {
-            totalAmount += lineItem.totalAmount() + lineItem.lineItemSalesTax();
-        }
-        return totalAmount;
+        return lineItemList.stream().mapToDouble(lineItem -> lineItem.totalAmount() + lineItem.lineItemSalesTax()).sum();
     }
 
     private double calculateDiscount() {

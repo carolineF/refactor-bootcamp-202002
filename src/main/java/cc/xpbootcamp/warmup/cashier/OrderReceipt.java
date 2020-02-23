@@ -3,6 +3,7 @@ package cc.xpbootcamp.warmup.cashier;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  * OrderReceipt prints the details of order including customer name, address, description, quantity,
@@ -76,11 +77,7 @@ public class OrderReceipt {
     }
 
     private String generateReceiptLineItem() {
-        StringBuilder lineItemString = new StringBuilder();
-        for (LineItem lineItem : order.getLineItemList()) {
-            lineItemString.append(getLineItemString(lineItem));
-        }
-        return lineItemString.toString();
+        return order.getLineItemList().stream().map(lineItem -> getLineItemString(lineItem)).collect(Collectors.joining());
     }
 
     private String generateReceiptHeader() {
