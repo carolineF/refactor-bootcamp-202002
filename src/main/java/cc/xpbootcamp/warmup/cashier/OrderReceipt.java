@@ -31,7 +31,7 @@ public class OrderReceipt {
         output.append("-----------------------------------\n");
 
         output.append(generateReceiptFooter());
-        System.out.println(output.toString());
+
         return output.toString();
     }
 
