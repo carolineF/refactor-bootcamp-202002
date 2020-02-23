@@ -1,12 +1,13 @@
 package cc.xpbootcamp.warmup.cashier;
 
+import java.time.DayOfWeek;
 import java.util.List;
 import java.time.LocalDate;
+
 
 public class Order {
     private static final double NO_DISCOUNT = 0d;
     private static final double WEDNESDAY_DISCOUNT = 0.02d;
-    private static final byte WEDNESDAY = 3;
 
     public List<LineItem> lineItemList;
     public LocalDate orderDate;
@@ -49,6 +50,6 @@ public class Order {
     }
 
     private double calculateDiscount() {
-        return orderDate.getDayOfWeek().getValue() == WEDNESDAY ? WEDNESDAY_DISCOUNT : NO_DISCOUNT;
+        return orderDate.getDayOfWeek().equals(DayOfWeek.WEDNESDAY) ? WEDNESDAY_DISCOUNT : NO_DISCOUNT;
     }
 }
